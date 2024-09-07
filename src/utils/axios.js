@@ -1,7 +1,9 @@
+/** @format */
+
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+  baseURL: import.meta.env.VITE_BACKEND_URL,
 });
 
 instance.interceptors.request.use(
@@ -17,6 +19,7 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
+    console.log('response: ', response);
     // make your response modifications here
     return response;
   },

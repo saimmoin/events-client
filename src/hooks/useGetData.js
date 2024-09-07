@@ -1,13 +1,15 @@
 /**
  * difference between hook and component is
  * component returns JSX and hook returns data and functions
+ *
+ * @format
  */
 
-import axios from "@/utils/axios";
+import axios from "@utils/axios";
 import { useCallback, useEffect, useState } from "react";
 
 // return data, isLoading, isError, refetch, isSuccess, error
-export const useGetData = (path) => {
+const useGetData = (path) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -25,7 +27,7 @@ export const useGetData = (path) => {
     setIsLoading(true);
     try {
       const response = await axios.get(path);
-      setData(response.data);
+      setData(response);
       setIsSuccess(true);
     } catch (error) {
       setIsError(true);
@@ -54,3 +56,5 @@ export const useGetData = (path) => {
     refetch,
   };
 };
+
+export default useGetData;

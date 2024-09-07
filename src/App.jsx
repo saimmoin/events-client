@@ -1,20 +1,20 @@
 /** @format */
 
 import { useAccount, useConnect, useDisconnect } from "wagmi";
-import { Button } from "@/components/ui/button";
+import useGetData from "./hooks/useGetData";
 
 function App() {
   const account = useAccount();
   const { connectors, connect, status, error } = useConnect();
   const { disconnect } = useDisconnect();
 
+  const { data, isLoading, isError, refetch, isSuccess, error: userFetchError } = useGetData(`/user/${account.addresses?.[0]}`);
+  console.log("data: ", data);
+
   return (
     <>
       <div>
         <h2 className="text-3xl font-bold underline">Account</h2>
-
-        {/* <Button className="text-3xl font-bold underline">Button</Button> */}
-
         <div>
           status: {account.status}
           <br />

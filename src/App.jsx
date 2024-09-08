@@ -1,49 +1,28 @@
 /** @format */
-
-import { useAccount, useConnect, useDisconnect } from "wagmi";
-import useGetData from "./hooks/useGetData";
+import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
+import Home  from "./pages/Home";
+import CreatePost  from "./pages/CreatePost";
+import PostDetails  from "./pages/PostDetails";
+import Register  from "./pages/Register";
+import Navbar from "./components/navbar";
+import Profile  from "./pages/Profile";
+import Search  from "./pages/Search";
 
 function App() {
-  const account = useAccount();
-  const { connectors, connect, status, error } = useConnect();
-  const { disconnect } = useDisconnect();
-
-  const { data, isLoading, isError, refetch, isSuccess, error: userFetchError } = useGetData(`/user/${account.addresses?.[0]}`);
-  console.log("data: ", data);
-
   return (
     <>
       <div>
-        <h2 className="text-3xl font-bold underline">Account</h2>
-        <div>
-          status: {account.status}
-          <br />
-          addresses: {JSON.stringify(account.addresses)}
-          <br />
-          chainId: {account.chainId}
-        </div>
-
-        {account.status === "connected" && (
-          <button className="h-10 px-6 font-semibold rounded-md bg-black text-white font-mono" type="button" onClick={() => disconnect()}>
-            Disconnect
-          </button>
-        )}
-      </div>
-
-      <div>
-        <h2>Connect</h2>
-        {connectors.map((connector) => (
-          <button
-            className="h-10 px-6 font-semibold rounded-md bg-black text-white font-mono"
-            key={connector.uid}
-            onClick={() => connect({ connector })}
-            type="button"
-          >
-            {connector.name}
-          </button>
-        ))}
-        <div>{status}</div>
-        <div>{error?.message}</div>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/create" element={<CreatePost />} />
+            <Route path="/post/details" element={<PostDetails />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </Router>
       </div>
     </>
   );

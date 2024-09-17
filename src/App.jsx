@@ -1,12 +1,12 @@
 /** @format */
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import CreatePost from "./pages/CreatePost";
+import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
 import Profile from "./pages/Profile";
-import Register from "./pages/Register";
 import Search from "./pages/Search";
+import Register from "./pages/register";
+import Navbar from "./components/navbar";
 
 function App() {
   return (

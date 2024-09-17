@@ -1,12 +1,12 @@
 /** @format */
-import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
-import Home  from "./pages/Home";
-import CreatePost  from "./pages/CreatePost";
-import PostDetails  from "./pages/PostDetails";
-import Register  from "./pages/Register";
-import Navbar from "./components/navbar";
-import Profile  from "./pages/Profile";
-import Search  from "./pages/Search";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import CreatePost from "./pages/CreatePost";
+import Home from "./pages/Home";
+import PostDetails from "./pages/PostDetails";
+import Profile from "./pages/Profile";
+import Register from "./pages/Register";
+import Search from "./pages/Search";
 
 function App() {
   return (

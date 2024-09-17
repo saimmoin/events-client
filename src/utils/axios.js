@@ -3,8 +3,11 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
+  baseURL: "http://192.168.100.8:8000",
 });
+console.log("⚡ ~ import.meta.env.:", import.meta.env);
+console.log("⚡ ~ import.meta.env.BACKEND_URL:", import.meta.env.BACKEND_URL);
+import useGetData from '../hooks/useGetData';
 
 instance.interceptors.request.use(
   (config) => {
@@ -19,12 +22,12 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
-    console.log('response: ', response);
+    console.log("response: ", response);
     // make your response modifications here
     return response;
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(error.response.data);
   }
 );
 

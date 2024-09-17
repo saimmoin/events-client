@@ -1,9 +1,9 @@
 /** @format */
 
-import React from "react";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { Button } from "@/components/ui/button";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 import {
   DropdownMenu,
@@ -14,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import useGetData from "../hooks/useGetData";
 import { truncateAddress } from "../utils/common";
 
 export const ConnectWallet = () => {
@@ -22,7 +23,9 @@ export const ConnectWallet = () => {
   const [position, setPosition] = React.useState("bottom");
 
   const { connectors, connect, status } = useConnect();
-  console.log("status", status, account, account.status);
+  // console.log("status", status, account, account.status);
+  const { data: userInfo, error, isError } = useGetData(`/user/${account.address}`);
+
   return (
     <div>
       {account.status === "connected" ? (
@@ -52,8 +55,7 @@ export const ConnectWallet = () => {
                 className="h-10 px-6 font-semibold rounded-md bg-black text-white font-mono"
                 key={connector.uid}
                 onClick={() => connect({ connector })}
-                type="button"
-              >
+                type="button">
                 {connector.name}
               </button>
             ) : null

@@ -1,13 +1,16 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
+  "files": [
+    "src/components/ui/button.jsx",
+    "src/components/ui/dropdown-menu.jsx",
+    "src/components/ui/input.jsx",
+    "src/pages/CreatePost.jsx",
+    "src/pages/Home.jsx",
+    "src/pages/PostDetails.jsx",
+    "src/pages/Profile.jsx",
+    "src/pages/Register.jsx",    
+    "src/pages/Search.jsx"
   ],
+  "references": [],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

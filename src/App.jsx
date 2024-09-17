@@ -5,8 +5,8 @@ import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
-import Register from "./pages/register";
-import Navbar from "./components/navbar";
+import Register from "./pages/Register";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (

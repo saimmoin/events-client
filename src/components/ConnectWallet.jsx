@@ -12,7 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuRadioGroup,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import useGetData from "../hooks/useGetData";
 import { truncateAddress } from "../utils/common";
@@ -23,7 +23,6 @@ export const ConnectWallet = () => {
   const [position, setPosition] = React.useState("bottom");
 
   const { connectors, connect, status } = useConnect();
-  // console.log("status", status, account, account.status);
   const { data: userInfo, error, isError } = useGetData(`/user/${account.address}`);
 
   return (
@@ -36,33 +35,23 @@ export const ConnectWallet = () => {
           <DropdownMenuContent className="w-56">
             <DropdownMenuSeparator />
 
-          <DropdownMenuGroup>
-            <DropdownMenuItem >
-              Profile
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Billing
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-
-
             <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-              {isError && false ? (
-                <Button variant="outline" onClick={() => disconnect()}>
-                  Register
-                </Button>
+              {isError ? (
+                <DropdownMenuGroup>
+                  <DropdownMenuItem value="Register">
+                    <Link to={"/register"}>Register</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
               ) : (
                 <>
-                  <DropDownMenuItem value="Profile">
-                    <Button variant="outline">
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem value="Profile">
                       <Link to={"/profile"}>Profile</Link>
-                    </Button>
-                  </DropDownMenuItem>
-                  <DropDownMenuItem value="Disconnect">
-                    <Button variant="outline" onClick={disconnect}>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={disconnect} className="cursor-pointer">
                       Disconnect
-                    </Button>
-                  </DropDownMenuItem>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
                 </>
               )}
             </DropdownMenuRadioGroup>
@@ -76,7 +65,8 @@ export const ConnectWallet = () => {
                 className="h-10 px-6 font-semibold rounded-md bg-black text-white font-mono"
                 key={connector.uid}
                 onClick={() => connect({ connector })}
-                type="button">
+                type="button"
+              >
                 {connector.name}
               </button>
             ) : null

@@ -8,11 +8,11 @@ import { useAccount, useConnect, useDisconnect } from "wagmi";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
+  DropdownMenuGroup,
+  DropdownMenuItem,
   DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import useGetData from "../hooks/useGetData";
 import { truncateAddress } from "../utils/common";
@@ -34,16 +34,37 @@ export const ConnectWallet = () => {
             <Button variant="outline">{truncateAddress(account.address)}</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
-            <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
             <DropdownMenuSeparator />
+
+          <DropdownMenuGroup>
+            <DropdownMenuItem >
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              Billing
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+
+
             <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-              <Link to={"/profile"}>
-                <DropdownMenuRadioItem value="Profile">Profile</DropdownMenuRadioItem>
-              </Link>
-              {/* <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem> */}
-              <DropdownMenuRadioItem value="Disconnect" onClick={disconnect}>
-                Disconnect
-              </DropdownMenuRadioItem>
+              {isError && false ? (
+                <Button variant="outline" onClick={() => disconnect()}>
+                  Register
+                </Button>
+              ) : (
+                <>
+                  <DropDownMenuItem value="Profile">
+                    <Button variant="outline">
+                      <Link to={"/profile"}>Profile</Link>
+                    </Button>
+                  </DropDownMenuItem>
+                  <DropDownMenuItem value="Disconnect">
+                    <Button variant="outline" onClick={disconnect}>
+                      Disconnect
+                    </Button>
+                  </DropDownMenuItem>
+                </>
+              )}
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>

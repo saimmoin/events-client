@@ -2,8 +2,7 @@
 
 import React from "react";
 import { useAppSelector } from "../store/store";
-import { selectProfile } from "../store/slice";
-
+import { selectProfile } from "../store/auth/slice";
 
 const Home = () => {
   const profile = useAppSelector(selectProfile);

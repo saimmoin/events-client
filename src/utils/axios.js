@@ -7,6 +7,7 @@ const instance = axios.create({
 });
 console.log("⚡ ~ import.meta.env.:", import.meta.env);
 console.log("⚡ ~ import.meta.env.BACKEND_URL:", import.meta.env.BACKEND_URL);
+
 import useGetData from '../hooks/useGetData';
 
 instance.interceptors.request.use(

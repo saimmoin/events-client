@@ -1,7 +1,7 @@
 /** @format */
 
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
@@ -15,6 +15,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import useGetData from "../hooks/useGetData";
+import { setProfile, setProfileError } from "../store/auth/slice";
+import { useAppDispatch } from "../store/store";
 import { truncateAddress } from "../utils/common";
 
 export const ConnectWallet = () => {
@@ -23,8 +25,17 @@ export const ConnectWallet = () => {
   const [position, setPosition] = React.useState("bottom");
 
   const { connectors, connect, status } = useConnect();
-  const { data: userInfo, error, isError } = useGetData(`/user/${account.address}`);
+  const { data: userInfo, error, isError, isSuccess } = useGetData(`/user/${account.address}`);
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setProfile(userInfo));
+    } else if (isError) {
+      console.log("⚡ ~ error:", error)
+      dispatch(setProfileError(error));
+    }
+  });
   return (
     <div>
       {account.status === "connected" ? (
@@ -65,8 +76,7 @@ export const ConnectWallet = () => {
                 className="h-10 px-6 font-semibold rounded-md bg-black text-white font-mono"
                 key={connector.uid}
                 onClick={() => connect({ connector })}
-                type="button"
-              >
+                type="button">
                 {connector.name}
               </button>
             ) : null

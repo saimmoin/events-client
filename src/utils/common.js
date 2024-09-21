@@ -10,6 +10,8 @@ export function truncateAddress(address, startChars = 6, endChars = 4) {
   return `${start}...${end}`;
 }
 
+export const SUBGRAPH_URL = "https://api.studio.thegraph.com/query/62444/chainconnect/version/latest";
+
 // Example usage:
 const ethAddress = "0x1234567890abcdef1234567890abcdef12345678";
 const truncatedAddress = truncateAddress(ethAddress);

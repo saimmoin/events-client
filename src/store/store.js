@@ -1,11 +1,13 @@
 /** @format */
 
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./auth/slice";
 import { useDispatch, useSelector } from "react-redux";
+import authReducer from "./auth/slice";
+import postsReducer from "./posts/slice";
 
-export const useAppDispatch = () => useDispatch();
+const store = configureStore({ reducer: { auth: authReducer, posts: postsReducer } });
+
 export const useAppSelector = useSelector;
+export const useAppDispatch = () => useDispatch();
 
-const store = configureStore({ reducer: { user: userReducer } });
 export default store;

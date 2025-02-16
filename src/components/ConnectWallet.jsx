@@ -32,7 +32,7 @@ export const ConnectWallet = () => {
     if (isSuccess) {
       dispatch(setProfile(userInfo));
     } else if (isError) {
-      console.log("⚡ ~ error:", error)
+      console.log("⚡ ~ error:", error);
       dispatch(setProfileError(error));
     }
   });
@@ -72,13 +72,9 @@ export const ConnectWallet = () => {
         <>
           {connectors.map((connector) =>
             connector.id === "metaMaskSDK" ? (
-              <button
-                className="h-10 px-6 font-semibold rounded-md bg-black text-white font-mono"
-                key={connector.uid}
-                onClick={() => connect({ connector })}
-                type="button">
+              <Button className="font-semibold rounded-md bg-black text-white font-mono" type="button" variant="outline" key={connector.uid} onClick={() => connect({ connector })}>
                 {connector.name}
-              </button>
+              </Button>
             ) : null
           )}
         </>
